@@ -1,0 +1,234 @@
+digraph fairness {
+    node [shape=box];
+    discrimination [ label="discriminar" ];
+    classifier [ label="clasificador" ];
+    justified_discrimination [ label="diferenciación justificado" ]
+    unjustified_discrimination [ label="diferenciación no justificada" ]
+    protected_classes [ label="clases protegidas" ]
+    protected_domains [ label="dominios protegidos" ]
+    government_behavior [ label="comportamiento gubernamental" ]
+    arg_law [ label="ley argentina" ]
+    usa_law [ label="ley estados unidos" ]
+    disparate_treatment [ label="tratamiento desparejo" ]
+    disparate_impact [ label="impacto desparejo" ]
+}
+
+/*
+no discriminación narrow: treat similar people similarly
+broad: equal oportunity if equally talented and ambitious
+in between: treat similarly disimilar people similarly becuase they look disimilar because of a past injustice (e.g.: born poor)
+tension between criteria
+
+firefighter in connecticut, white people results better, scrapped, sued by white people
+UT 10% rule
+black names 50% less callback chances in c
+bias training doesn't work, formalize decision making does
+
+ML can help formilizing
+
+discovering differences:
+* skewed sample (e.g.: policing in dangerous neighbourhood), feedback loop
+* tainted examples, biased labels (e.g.: manager performance reviews)
+
+coping with differences:
+* limited features (e.g.: less reliable for minority)
+* sample size disparity, minority may be a small % and may not affect metrics (e.g.: accuracy) significantly
+
+understading disparity:
+* relevant proxies (with rich data membership cannot be avoidable)
+
+disparate impact may be justified by ML, but it would not be acceptable
+
+# techniques used
+
+independence: C ind A
+separation: C ind A cond Y
+sufficiency: Y ind A cond C
+
+
+## independence
+
+same acceptance rate (demographic parity, statistical parity)}
+one way to approach: representation learning, learn to maximize result while minimizing the difference in an intermediate representation
+shortcoming:
+* ignores correlation between the target var and the sensitive attr
+* sensitive to sample size disparity
+desirable long term goal
+
+## separation
+
+mismo TPR/FPR
+ROC de ambos grupo establecen la frontera
+
+## sufficiency
+calibrar cada grupo para poder obtener una probabilidad
+
+# Todos los pares son mutuamente excluyentes
+
+?
+
+# Incluso haciendo estas cosas se puede mantener el sesgo
+
+https://pubsonline.informs.org/doi/10.1287/mnsc.2018.3093
+
+In addition to COMPAS,
+discriminatory behavior was also evident in an algorithm that would deliver advertisements promoting
+jobs in Science, Technology, Engineering, and Math (STEM) fields [74]. This advertisement was
+designed to deliver advertisements in a gender-neutral way. However, less women compared to
+men saw the advertisement due to gender-imbalance which would result in younger women being
+considered as a valuable subgroup and more expensive to show advertisements to
+
+
+a survey on bias and fairness in Machine Learning, mehrabi
+ejemplo de bias en data, calorías vs bmi
+muchos tipos de biases
+group granularity trade (142)
+definiciones de fairness (mismas chances, mismas oportunidades, pridad demográfica, etc) (123)
+puede ser dañino (80)
+pre/in/post processing
+
+fairness in criminal Justice risk assessments
+definiciones de fairness en una matriz de confusión
+imposibilidades de lograr
+*/
+
+/*
+digraph g {
+graph [
+rankdir = "LR"
+bgcolor = "white:lightblue"
+style="filled"
+gradientangle = 270];
+node [
+fontsize = "16"
+shape = "ellipse"
+style="filled"
+gradientangle=90
+];
+edge [
+];
+"node0" [
+label = "<f0> 0x10ba8| <f1>"
+shape = "record"
+gradientangle="90"
+fillcolor = "yellow:blue"
+];
+"node1" [
+label = "<f0> 0xf7fc4380| <f1> | <f2> |-1"
+shape = "record"
+fillcolor = "blue:red"
+gradientangle = 0
+];
+"node2" [
+label = "<f0> 0xf7fc44b8| | |2"
+shape = "record"
+fillcolor = "brown:yellow"
+gradientangle = 90
+];
+"node3" [
+label = "<f0> 3.43322790286038071e-06|44.79998779296875|0 | <f1>"
+shape = "record"
+fillcolor = "green:red"
+gradientangle = 90
+];
+"node4" [
+label = "<f0> 0xf7fc4380| <f1> | <f2> |2"
+shape = "record"
+fillcolor = "red:green"
+gradientangle = 0
+];
+"node5" [
+label = "<f0> (nil)| | |-1"
+shape = "record"
+fillcolor = "red:red"
+gradientangle = 90
+];
+"node6" [
+label = "<f0> 0xf7fc4380| <f1> | <f2> |1"
+shape = "record"
+fillcolor = "orange:green"
+];
+"node7" [
+label = "<f0> 0xf7fc4380| <f1> | <f2> |2"
+shape = "record"
+fillcolor = "cyan:green"
+];
+"node8" [
+label = "<f0> (nil)| | |-1"
+shape = "record"
+fillcolor = "cyan:cyan"
+];
+"node9" [
+label = "<f0> (nil)| | |-1"
+shape = "record"
+fillcolor = "orange:orange"
+gradientangle = 90
+];
+"node10" [
+label = "<f0> (nil)| <f1> | <f2> |-1"
+shape = "record"
+fillcolor = "magenta:green"
+];
+"node11" [
+label = "<f0> (nil)| <f1> | <f2> |-1"
+shape = "record"
+fillcolor = "red:green"
+];
+"node12" [
+label = "<f0> 0xf7fc43e0| | |1"
+shape = "record"
+fillcolor = "magenta:magenta"
+];
+"node0":f0 -> "node1":f0 [
+id = 0
+];
+"node0":f1 -> "node2":f0 [
+id = 1
+];
+"node1":f0 -> "node3":f0 [
+id = 2
+];
+"node1":f1 -> "node4":f0 [
+id = 3
+];
+"node1":f2 -> "node5":f0 [
+id = 4
+];
+"node4":f0 -> "node3":f1 [
+id = 5
+];
+"node4":f1 -> "node6":f0 [
+id = 6
+];
+"node4":f2 -> "node10":f0 [
+id = 7
+];
+"node6":f0 -> "node3":f1 [
+id = 8
+];
+"node6":f1 -> "node7":f0 [
+id = 9
+];
+"node6":f2 -> "node9":f0 [
+id = 10
+];
+"node7":f0 -> "node3":f1 [
+id = 11
+];
+"node7":f1 -> "node1":f0 [
+id = 12
+];
+"node7":f2 -> "node8":f0 [
+id = 13
+];
+"node10":f1 -> "node11":f0 [
+id = 14
+];
+"node10":f2 -> "node12":f0 [
+id = 15
+];
+"node11":f2 -> "node1":f0 [
+id = 16
+];
+}
+*/
