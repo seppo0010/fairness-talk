@@ -2,26 +2,51 @@ digraph fairness {
     node [shape=box];
     discrimination [ label="discriminar" ];
     classifier [ label="clasificador" ];
-    justified_discrimination [ label="diferenciación justificado" ]
+    justified_discrimination [ label="diferenciación justificada" ]
     unjustified_discrimination [ label="diferenciación no justificada" ]
     protected_classes [ label="clases protegidas" ]
-    protected_domains [ label="dominios protegidos" ]
-    government_behavior [ label="comportamiento gubernamental" ]
     arg_law [ label="ley argentina" ]
     usa_law [ label="ley estados unidos" ]
     disparate_treatment [ label="tratamiento desparejo" ]
     disparate_impact [ label="impacto desparejo" ]
+    treat_similarly_disimilar_people_because_of_past_injustice [ label="tratar igual gente distinta por pasadas injusticias" ]
+    impact_treatment_tension[ label="tension" shape="circle" ]
+    firefighter_connecticut [ label="bomberos en Connecticut" shape="polygon" sides="8" ]
+    ut_10percent_rule [ label="UT 10% rule" shape="polygon" sides="8" ]
+    california_ban_iq_test [ label="California no permite tests de IQ" shape="polygon" sides="8" ]
+    stem_ad [ label="publicidad de STEM menos mostrada a mujeres" shape="polygon" sides="8" ]
+
+    // a survey on bias and fairness in Machine Learning, mehrabi
+    bias_in_data [ label="bias in data" ]
+    calories_bmi [ label="calories vs BMI" shape="polygon" sides="8" ]
+
+    discrimination->classifier [ dir=both ]
+    discrimination->unjustified_discrimination
+    classifier->justified_discrimination
+    justified_discrimination->protected_classes
+    unjustified_discrimination->protected_classes
+    unjustified_discrimination->usa_law
+    unjustified_discrimination->arg_law
+    usa_law->firefighter_connecticut
+    discrimination->disparate_treatment
+    discrimination->disparate_impact
+    disparate_impact->impact_treatment_tension->disparate_treatment [ dir=none maxlen=0.1 ]
+    impact_treatment_tension->firefighter_connecticut
+    impact_treatment_tension->ut_10percent_rule
+    impact_treatment_tension->california_ban_iq_test
+    impact_treatment_tension->treat_similarly_disimilar_people_because_of_past_injustice
+    impact_treatment_tension->stem_ad
+
+    discrimination->bias_in_data
+    bias_in_data->calories_bmi
 }
 
 /*
 no discriminación narrow: treat similar people similarly
 broad: equal oportunity if equally talented and ambitious
 in between: treat similarly disimilar people similarly becuase they look disimilar because of a past injustice (e.g.: born poor)
-tension between criteria
 
-firefighter in connecticut, white people results better, scrapped, sued by white people
-UT 10% rule
-black names 50% less callback chances in c
+black names 50% less callback chances in cv
 bias training doesn't work, formalize decision making does
 
 ML can help formilizing
@@ -70,14 +95,6 @@ calibrar cada grupo para poder obtener una probabilidad
 # Incluso haciendo estas cosas se puede mantener el sesgo
 
 https://pubsonline.informs.org/doi/10.1287/mnsc.2018.3093
-
-In addition to COMPAS,
-discriminatory behavior was also evident in an algorithm that would deliver advertisements promoting
-jobs in Science, Technology, Engineering, and Math (STEM) fields [74]. This advertisement was
-designed to deliver advertisements in a gender-neutral way. However, less women compared to
-men saw the advertisement due to gender-imbalance which would result in younger women being
-considered as a valuable subgroup and more expensive to show advertisements to
-
 
 a survey on bias and fairness in Machine Learning, mehrabi
 ejemplo de bias en data, calorías vs bmi
