@@ -43,6 +43,16 @@ digraph fairness {
     treatment_equality [ label="treatment equality" ]
     no_simultaneous_satisfaction [ label="no se pueden satisfacer mutuamente" ]
 
+    // Categorías sospechosas y control de constitucionalidad, Guillermo F. Treacy *
+
+    estandar_razonabilidad [ label="estándar razonabilidad" ]
+    estandar_estricto [ label="estándar estricto" ]
+    accion_afirmativa [ label="acción afirmativa" ]
+    arg_law->estandar_razonabilidad
+    arg_law->estandar_estricto
+    arg_law->accion_afirmativa->treat_similarly_disimilar_people_because_of_past_injustice
+    estandar_estricto->protected_classes
+
     //
 
     discrimination->classifier [ dir=both ]
@@ -53,6 +63,8 @@ digraph fairness {
     unjustified_discrimination->usa_law
     unjustified_discrimination->arg_law
     usa_law->firefighter_connecticut
+    usa_law->ut_10percent_rule
+    usa_law->california_ban_iq_test
     discrimination->disparate_treatment
     discrimination->disparate_impact
     disparate_impact->impact_treatment_tension->disparate_treatment [ dir=none maxlen=0.1 ]
