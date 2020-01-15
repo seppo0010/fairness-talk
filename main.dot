@@ -18,16 +18,16 @@ digraph fairness {
 
     ml_discrimination_sources [ label="origen de la discriminación en ML"]
 
-    skewed_sample [ label="muestra sesgada" ]
-    tainted_examples [ label="observaciones contaminadas" ]
-    biased_labels [ label="etiquetas sesgadas" ]
+    skewed_sample [ label="muestra sesgada\n(sampling bias, representation bias, population bias)" ]
+    tainted_examples [ label="observaciones contaminadas " ]
+    biased_labels [ label="etiquetas sesgadas (measurement bias)" ]
     limited_features [ label="información limitada" ]
     sample_size_disparity [ label="disparidad de tamaño de muestra" ]
     proxies [ label="proxies" ]
 
     // a survey on bias and fairness in Machine Learning, mehrabi
 
-    simpson_paradox [ label="paradoja de simpson" ]
+    simpson_paradox [ label="paradoja de simpson (aggregation bias)" ]
     calories_bmi [ label="calories vs BMI" shape="polygon" sides="8" ]
 
     // https://arxiv.org/abs/1703.09207
@@ -65,6 +65,7 @@ digraph fairness {
     usa_law->firefighter_connecticut
     usa_law->ut_10percent_rule
     usa_law->california_ban_iq_test
+    usa_law->protected_classes
     discrimination->disparate_treatment
     discrimination->disparate_impact
     disparate_impact->impact_treatment_tension->disparate_treatment [ dir=none maxlen=0.1 ]
