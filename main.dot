@@ -53,6 +53,15 @@ digraph fairness {
     arg_law->accion_afirmativa->treat_similarly_disimilar_people_because_of_past_injustice
     estandar_estricto->protected_classes
 
+    // The Frontiers of Fairness in Machine Learning, Alexandra Chouldechova, Aaron Roth
+
+    intersectionality [ label="interseccionalidad" ]
+    long_term_effects [ label="efectos de largo plazo" ]
+    feedback_loop [ label="feedback loop" ]
+    fair_representation [ label="representación justa" ]
+    explore_exploit [ label="explorar/explotar" ]
+    is_explore_exploit_fair [ label="¿es justo?" shape="circle" ]
+
     //
 
     discrimination->classifier [ dir=both ]
@@ -103,4 +112,14 @@ digraph fairness {
     conditional_procedure_accuracy_equality->no_simultaneous_satisfaction
     conditional_use_accuracy_equality->no_simultaneous_satisfaction
     treatment_equality->no_simultaneous_satisfaction
+
+    protected_classes->intersectionality
+    fairness->long_term_effects
+    fairness->feedback_loop
+    feedback_loop->feedback_loop
+    feedback_loop->ml_discrimination_sources
+    fairness->fair_representation
+    feedback_loop->explore_exploit
+    explore_exploit->is_explore_exploit_fair
+    is_explore_exploit_fair->fairness
 }
