@@ -62,6 +62,12 @@ digraph fairness {
     explore_exploit [ label="explorar/explotar" ]
     is_explore_exploit_fair [ label="¿es justo?" shape="circle" ]
 
+    // Cathy O'neil interview https://www.datacamp.com/community/blog/weapons-math-destruction
+
+    interpretability [ label="interpretabilidad" ]
+    legal_deniability [ label="negabilidad legal" ]
+    invisible_harm [ label="daño invisible" ]
+
     //
 
     discrimination->classifier [ dir=both ]
@@ -122,4 +128,9 @@ digraph fairness {
     feedback_loop->explore_exploit
     explore_exploit->is_explore_exploit_fair
     is_explore_exploit_fair->fairness
+
+    fairness->interpretability
+    arg_law->legal_deniability
+    usa_law->legal_deniability
+    classifier->invisible_harm
 }
